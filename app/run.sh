@@ -1,4 +1,4 @@
-cp proxy.json.bak proxy.json
+echo $JSON_CONFIG > proxy.json
 
 sh -c "sed -i -- 's,\${target-url},$TARGET_URL,g' proxy.json"
 
