@@ -1,4 +1,4 @@
-echo $JSON_CONFIG > proxy.json
+cp config/proxy.json proxy.json
 
 sh -c "sed -i -- 's,\${target-url},$TARGET_URL,g' proxy.json"
 
