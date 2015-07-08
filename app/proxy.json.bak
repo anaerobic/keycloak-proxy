@@ -1,0 +1,45 @@
+{
+    "target-url": "${target-url}",
+    "send-access-token": true,
+    "bind-address": "${host-ip}",
+    "http-port": "8080",
+    "applications": [
+        {
+            "base-path": "/images",
+            "error-page": "/error.html",
+            "adapter-config": {
+                "realm": "demo",
+                "resource": "customer-portal",
+                "auth-server-url": "http://${auth-server-ip}:${auth-server-port}/auth",
+                "ssl-required" : "none",
+                "principal-attribute": "name",
+                "credentials": {
+                    "secret": "password"
+                }
+            }
+            ,
+            "constraints": [
+                {
+                    "pattern": "/users/*",
+                    "roles-allowed": [
+                        "user"
+                    ]
+                },
+                {
+                    "pattern": "/admins/*",
+                    "roles-allowed": [
+                        "admin"
+                    ]
+                },
+                {
+                    "pattern": "/users/permit",
+                    "permit": true
+                },
+                {
+                    "pattern": "/users/deny",
+                    "deny": true
+                }
+            ]
+        }
+    ]
+}
