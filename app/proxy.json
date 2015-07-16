@@ -1,0 +1,50 @@
+{
+    "target-url": "http://localhost:8082",
+    "send-access-token": true,
+    "bind-address": "localhost",
+    "http-port": "8080",
+    "https-port": "8443",
+    "keystore": "classpath:ssl.jks",
+    "keystore-password": "password",
+    "key-password": "password",
+    "applications": [
+        {
+            "base-path": "/customer-portal",
+            "error-page": "/error.html",
+            "adapter-config": {
+                "realm": "demo",
+                "resource": "customer-portal",
+                "realm-public-key": "MIGfMA0GCSqGSIb",
+                "auth-server-url": "http://localhost:8081/auth",
+                "ssl-required" : "external",
+                "principal-attribute": "name",
+                "credentials": {
+                    "secret": "password"
+                }
+            }
+            ,
+            "constraints": [
+                {
+                    "pattern": "/users/*",
+                    "roles-allowed": [
+                        "user"
+                    ]
+                },
+                {
+                    "pattern": "/admins/*",
+                    "roles-allowed": [
+                        "admin"
+                    ]
+                },
+                {
+                    "pattern": "/users/permit",
+                    "permit": true
+                },
+                {
+                    "pattern": "/users/deny",
+                    "deny": true
+                }
+            ]
+        }
+    ]
+}
